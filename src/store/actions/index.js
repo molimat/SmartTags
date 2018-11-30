@@ -16,6 +16,6 @@ export const renameTag = (device, text) => ({
   export const addTagFake = text => (
     console.log("ADDTAGFAKE CHAMADA COM PROPS" + text) ,
     {
-    type: "ADD_TAG_FAKE",
+    type: "ASYNC_ADD_TAG_FAKE",
     payload: text
   });

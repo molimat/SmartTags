@@ -9,7 +9,9 @@ import * as tagsActions from '../store/actions';
 import TagList from '../components/TagList';
 import storage from '../functions/Storage';
 
+
 import Input from '../components/textInput'
+
 
 
 //import { TagPosition } from '../functions/GPSTag'
