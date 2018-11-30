@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Text, TextInput, TouchableHighlight, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import NewTagButton from '../components/NewTagButton';
-import { Button, Divider } from 'react-native-elements'
+import { Button } from 'react-native-elements'
 
-
+import * as tagsActions from '../store/actions';
 import TagList from '../components/TagList';
 import storage from '../functions/Storage';
-import { Object } from 'core-js';
-import TabBarIcon from '../components/TabBarIcon';
+
+import Input from '../components/textInput'
+
+
 //import { TagPosition } from '../functions/GPSTag'
 
 class TagsScreen extends Component {
   constructor(props) {
     super(props);
-    
-    this.state = {message:"",
-                  pairedDevices: [{}], 
-  
-    };
+    this.state = {
+      textInput: "",
+    }
   }
 
   componentDidMount () {
-    var self = this;
+    /* var self = this;
     storage.getAllData() //tem que esperar a promise
           .then(function (devices) {
               self.setState({message: "Scaneamento finalizado.",
@@ -30,20 +31,33 @@ class TagsScreen extends Component {
               );
 
         })
-          .catch(()=> console.log("Promise rejected"))
+          .catch(()=> console.log("Promise rejected")) */
   }
   
 
-  
+  addNewTag = () => {
+    this.props.addTagFake(this.state.textInput)
+    this.setState({textInput: ''})
+  }
+
+  onChangeText(text) {
+    this.setState({
+      textInput: text
+    })
+  }
+
+  onPress(){
+    this.addNewTag(this.state.textInput)
+  }
 
   render() {
-    
+    const { textInput } = this.state
     return (
       <View style = {styles.container}>
 
         <Text>{this.state.message}</Text>
   
-        <TagList  devices = {this.state.pairedDevices} origem = 'MyTag'/>
+        <TagList  devices = {this.props.tags} origem = 'MyTag'/>
         <NewTagButton/>
         <View style = {styles.divContainer}>
           <Button style = {styles.button1}
@@ -71,7 +85,18 @@ class TagsScreen extends Component {
             backgroundColor = '#645DD7'
             icon={{name: 'pencil', type: 'font-awesome'}}
             title='Edit Tags'  
-          />         
+          />  
+          <View>
+            
+            <Input value = {textInput} onChangeText = {(e) => {this.onChangeText(e)}} />
+            <Button style = {styles.button2}
+              onPress={() => {this.onPress()}}
+              raised
+              backgroundColor = '#333'
+              icon={{name: 'pencil', type: 'font-awesome'}}
+              title='ADICIONAR TAG'  
+            /> 
+          </View>      
         </View>
       </View>
     );
@@ -100,9 +125,16 @@ const styles = StyleSheet.create ({
 
     
   },
-  input: {
-    display: 'none',
-  },
+
+
+
 });
 
-export default TagsScreen;
+const mapStateToPros = state => ({
+  tags: state.tags
+});
+
+const mapDispatchToProps = dispatch => 
+  (bindActionCreators(tagsActions, dispatch))
+
+export default connect(mapStateToPros, mapDispatchToProps) (TagsScreen);
