@@ -55,7 +55,6 @@ class TagsScreen extends Component {
 
   
   render() {
-    console.log("HSUHASUHASUHSAUHSAUHSAUH")
     const { textInput } = this.state
     return (
       <View style = {styles.container}>

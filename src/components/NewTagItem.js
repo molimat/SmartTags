@@ -30,13 +30,12 @@ class NewTagItem extends Component {
     addNewTag = () => {
         const tag = {name: this.state.deviceName, 
                     address: this.state.deviceAddress,
-                    location: {
-                        latitude: null,
-                        longitude: null
-                    }    
+                    latitude: null,
+                    longitude: null,
                 }
-        console.log(tag)
+        
         this.props.addTag(tag)
+        this.props.setLocation(tag.address)
         this.setState({deviceName: ''})
         this.props.navigation.navigate('TagStack')
     }

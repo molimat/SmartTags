@@ -1,4 +1,5 @@
 import {takeEvery, put, call} from 'redux-saga/effects'
+import { getPersistor } from '../store';
 
 const getPosition = function () {
     return new Promise(function (resolve, reject) {
@@ -9,16 +10,15 @@ const getPosition = function () {
 }
 
 function* asyncSetLocation(action){
+
     const response = yield call (getPosition);
     const {latitude, longitude} = response.coords; 
-
-
     yield put({type:'SET_LOCATION', 
             payload:
                 {address: action.payload,
                  latitude: latitude,
                  longitude: longitude}
-            })
+            })      
 }
 
 export default function* root(){
