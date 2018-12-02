@@ -28,7 +28,7 @@ export default class LocationMap extends Component {
     return (
       <MapboxGL.MapView
       centerCoordinate={[-43.2096, -22.9035]}
-      zoomLevel = {7}
+      zoomLevel = {9}
       style={styles.container}
       showUserLocation = {true}
       styleURL={MapboxGL.StyleURL.Dark}

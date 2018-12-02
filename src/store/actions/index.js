@@ -1,6 +1,6 @@
-export const addTag = device => ({
+export const addTag = (tag)=> ({
     type: "ADD_TAG",
-    payload: device
+    payload: tag
   });
 
 export const removeTag = id => ({
@@ -13,9 +13,9 @@ export const renameTag = (device, text) => ({
     payload: (device, text)
   });
 
-  export const addTagFake = text => (
-    console.log("ADDTAGFAKE CHAMADA COM PROPS" + text) ,
-    {
-    type: "ASYNC_ADD_TAG_FAKE",
-    payload: text
+  export const setLocation = address => ({
+    type: "ASYNC_SET_LOCATION",
+    payload: address
   });
+
+  
