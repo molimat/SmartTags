@@ -16,22 +16,64 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pickerValue: this.props.tags[0]['address'] //É O MAC_ADDRESS DA TAG
+      pickerId: 0,
+      pickerValue: this.props.tags[0]['address'], //É O MAC_ADDRESS DA TAG
+      auxName: this.props.tags[0]['name'],
+      auxLatitude: this.props.tags[0]['latitude'],
+      auxLongitude: this.props.tags[0]['longitude'],
+      status: ''
     }
 
   }
 
-  componentDidUpdate () {
-    console.log("Valor mudou para" + this.state.pickerValue)
+updateLocation() {
+    const list = this.props.setLocation(this.state.pickerValue)
+    return list;
+}
+  
+onPress() {
+  this.setState({status: "updating"})
+  this.updateLocation();
+}
+
+ComponentDidUpdate() {
+  this.setState({status:""})
+}
+
+/* 
+  getTagInfo () {
+    let coordenadas = this.getActualLocation(this.props.tags, this.state.pickerValue)
+    this.setState({
+      auxLatitude: coordenadas.latitude,
+      auxLongitude: coordenadas.longitude,
+      auxName: coordenadas.name,
+      pickerValue: coordenadas.address
+    })
   }
 
-  onPress () {
-    this.props.setLocation(this.state.pickerValue) 
-    alert("Atualizado!")
-  }
+  getActualLocation(tags, address) {
+    const list = tags;
+    let coord = {latitude: null, longitude:null}
+      list.map(
+        function (tag) {
+          {if(tag.address === address )
+            {  
+              //return (location.latitude, location.longitude);
+              coord.latitude = tag.latitude, 
+              coord.longitude = tag.longitude,
+              coord.name = tag.name
+              coord.addres = tag.address
+            }
+          }
+        }
+      )
+    return coord
+  } */
 
+
+  
   render() {
-    console.log(this.props)
+    
     return (
       <View style = {styles.container}>
         <View style = {styles.pickerContainer}>
@@ -39,7 +81,12 @@ class HomeScreen extends Component {
             selectedValue={this.state.pickerValue}
             mode= {'dropdown'}
             style={styles.pickerStyle}
-            onValueChange={(itemValue) => (this.setState({pickerValue: itemValue}))}>   
+            onValueChange={(itemValue, itemIndex) => {
+                this.setState(
+                  {pickerValue: itemValue,
+                    pickerId: itemIndex
+              })          
+            }}>   
               {this.props.tags.map((item, index) => {
                 return (< Picker.Item label={item.name} value={item.address} key={item.address} />);
               })} 
@@ -48,8 +95,10 @@ class HomeScreen extends Component {
         <Text>Mapa abaixo</Text>
         <View style = {styles.containerMap}>
           <LocationMap
-            longitude = {-43.3527}
-            latitude = {-22.8973}
+            address = {this.state.pickerValue}
+            latitude = {this.props.tags[this.state.pickerId]['latitude']}
+            longitude = {this.props.tags[this.state.pickerId]['longitude']}
+            name = {this.props.tags[this.state.pickerId]['name']}
           />
         </View>
         <View>
@@ -61,6 +110,9 @@ class HomeScreen extends Component {
               icon={{name: 'cached'}}
               title='Update Status' /> 
         </View>
+        <Text>
+          {this.state.status}
+        </Text>
       </View>
       
     );

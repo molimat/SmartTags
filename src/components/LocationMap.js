@@ -11,15 +11,19 @@ export default class LocationMap extends Component {
   renderAnnotations() {
     const longitude = this.props.longitude;
     const latitude = this.props.latitude;
+    const address = this.props.address;
+    const name = this.props.name
+    
+    const message = (name + '\n' + address + '\n' + latitude + longitude)
     return (
       <MapboxGL.PointAnnotation
-        id='rocketseat'
+        id={address}
         coordinate={[longitude, latitude]}
       >
         <View style={styles.annotationContainer}>
           <View style={styles.annotationFill} />
         </View>
-        <MapboxGL.Callout title='Rocketseat House' />
+        <MapboxGL.Callout title={message} />
       </MapboxGL.PointAnnotation>
     )
   }
