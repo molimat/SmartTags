@@ -13,7 +13,7 @@ class CancelNewTagButton extends Component {
 
 
   goToHomeScreen() {
-    this.props.navigation.navigate('HomeStack');
+    this.props.navigation.navigate('TagStack');;
   }
 
   render() {

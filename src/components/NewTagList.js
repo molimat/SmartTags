@@ -1,26 +1,24 @@
 import React from 'react';
 import { View,  StyleSheet } from 'react-native';
 
-import TagItem from '../components/TagItem'
+import NewTagItem from './NewTagItem'
 
 
-const TagList = props => {
+const NewTagList = props => {
 
     const devicesList = props.devices;
-    const origem = props.origem;
 
     //aqui a gente vai passar device a device para a page TagItem
     const items = devicesList.map((device) => 
-        <TagItem 
-            key = {device.id}       
-            address = {device.id} 
-            name = {device.name}
-            origem = {origem}/>
+        <NewTagItem 
+            key = {device.address}       
+            address = {device.address} 
+            name = {device.name}/>
      );
 
 
      return (
-        <View key = {items.id} styles = {styles.container}>
+        <View key = {items.address} styles = {styles.container}>
           {items}
         </View>
       );
@@ -36,4 +34,4 @@ const styles = StyleSheet.create({
     }
   })
 
-export default TagList;
+export default NewTagList;

@@ -52,7 +52,10 @@ class TagsScreen extends Component {
     this.addNewTag(this.state.textInput)
   }
 
+
+  
   render() {
+    console.log("HSUHASUHASUHSAUHSAUHSAUH")
     const { textInput } = this.state
     return (
       <View style = {styles.container}>
@@ -69,7 +72,7 @@ class TagsScreen extends Component {
             })}}
             raised
             icon={{name: 'cached'}}
-            title='Refresh Tags' />
+            title='Update Status' /> 
           <Button style = {styles.button2}
             onPress={() => {
                 storage.removeTags()}}

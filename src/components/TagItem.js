@@ -1,16 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons' 
-import storage from '../functions/Storage'
 import {connectToDevice, sendChar} from '../functions/Bluetooth'
 
 
-const TagItem = (props) => {
-    const {address, name, origem } = props;
-    const self = this;
-    const device = {address: this.address, name:this.name}
 
-    if (origem === 'MyTag' ) {
+const TagItem = (props) => {
+    const {address, name } = props;
+    const device = {address: this.address, name:this.name}
    
         return (
             <View style = {styles.container}>
@@ -37,24 +34,8 @@ const TagItem = (props) => {
             </View>
         
         )
-    }
-    else {
-        return (
-            <View style = {styles.containerNew}>
-                    <Text style = {styles.addressNew}>{address}</Text> 
-                    <Text style = {styles.nameNew}>{name}</Text>
-                    <View>
-                        <TouchableHighlight>
-                            <View>
-                                <Icon   name = "ios-add-circle-outline" 
-                                    size= {30} 
-                                    onPress={() => storage.pushData(address, name)}/>
-                            </View>
-                        </TouchableHighlight>    
-                    </View> 
-            </View>
-        )
-    }
+    
+    
 }
 
 const styles = StyleSheet.create({
@@ -112,4 +93,5 @@ const styles = StyleSheet.create({
 });
 
 export default TagItem;
+
 

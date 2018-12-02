@@ -4,7 +4,7 @@ import MainTabNavigator from '../navigation/MainTabNavigator';
 import CancelNewTagButton from '../components/CancelNewTagButton';
 
 import EasyBluetooth from 'easy-bluetooth-classic';
-import TagList from '../components/TagList';
+import NewTagList from '../components/NewTagList';
 
 
 
@@ -12,8 +12,7 @@ class NewTagScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      devices: [{name: null,
-                address: null, latitude: null, longitude: null}],
+      devices: [],
       ready: false,
       loading: true,
       message: "",
@@ -37,7 +36,7 @@ class NewTagScreen extends Component {
       
     }
 
-    navigator.geolocation.getCurrentPosition(
+  /*   navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({devices: {
           latitude: position.coords.latitude,
@@ -46,7 +45,7 @@ class NewTagScreen extends Component {
       },
       (error) => {console.log(error)},
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );
+    ); */
 
 
 
@@ -83,9 +82,8 @@ class NewTagScreen extends Component {
   render() { //corrigir o loading pra ficar maneiro
     return (
       <View>
-        {(<ActivityIndicator size="small" color="#00ff00" />) && this.state.loading} 
         <Text style = {styles.info}>{this.state.message}</Text>
-        { this.state.ready && <TagList devices = {this.state.devices} origem = 'NewTag'/> } 
+        { this.state.ready && <NewTagList devices = {this.state.devices}/> } 
         <CancelNewTagButton />
 
       </View>
