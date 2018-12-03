@@ -21,7 +21,7 @@ export default function tags(state = initialState, action) {
     case 'GET_BLUETOOTH_LIST':
       return state.map(tag => {
         if (tag.address === action.payload.address) {
-          return {...tag, lastSeen: action.payload.updatedAt}
+          return {...tag, lastSeen: action.payload.updatedAt, latitude: action.payload.latitude, longitude: action.payload.longitude}
           };
           return tag; 
         });  

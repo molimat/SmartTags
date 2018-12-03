@@ -30,12 +30,11 @@ class HomeScreen extends Component {
   
 updateLocation() {
     
-    const list = this.props.setLocation(this.state.pickerValue)
+    const list = this.props.getBluetoothDevicesList();
     return list;
 }
   
 onPress() {
-  this.setState({status: "updating"})
   this.updateLocation();
 }
 

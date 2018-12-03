@@ -1,5 +1,7 @@
 import {takeEvery, put, call, all} from 'redux-saga/effects';
 import EasyBluetooth from 'easy-bluetooth-classic';
+import moment from 'moment';
+import 'moment/min/moment-with-locales';
 
 const getPosition = function () {
     return new Promise(function (resolve, reject) {
@@ -33,21 +35,21 @@ async function getBluetoothDevicesList () {
 
 
 function* asyncSetLocation(action){
-
     const response = yield call (getPosition);
-    const {latitude, longitude} = response.coords; 
+    const {latitude, longitude} = response.coords; // vai pegar posição
     yield put({type:'SET_LOCATION', 
             payload:
                 {address: action.payload,
                  latitude: latitude,
                  longitude: longitude}
-            })      
+            })
 }
 
 function* asyncGetBluetoothList(){
-    
+    const response = yield call (getPosition);
+    const {latitude, longitude} = response.coords;
     const devices = yield call (getBluetoothDevicesList);
-    const date = new Date();
+    const date = moment().format('llll')
     if (!devices[0]) {
         yield put({type:'default'})
     } else {
@@ -55,7 +57,10 @@ function* asyncGetBluetoothList(){
         yield put({type:'GET_BLUETOOTH_LIST', 
                 payload:
                     {address: devices[i]['address'],
-                    updatedAt: date}
+                    updatedAt: date,
+                    latitude: latitude,
+                    longitude: longitude
+                    }
                 }) }  
     }
 }

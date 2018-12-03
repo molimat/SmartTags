@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import NewTagButton from '../components/NewTagButton';
 import { Button } from 'react-native-elements'
+import moment from 'moment';
+import 'moment/min/moment-with-locales';
 
 import * as tagsActions from '../store/actions';
 import TagList from '../components/TagList';
@@ -24,16 +26,16 @@ class TagsScreen extends Component {
   }
 
   componentDidMount () {
-
+    BackgroundJob.cancelAll();
     const everRunningJobKey = "everRunningJobKey";
     BackgroundJob.register({
       jobKey: everRunningJobKey,
       job: () => {this.backgroundRunning()}
     });
-    BackgroundJob.cancelAll();
+    
     BackgroundJob.schedule({
       jobKey: everRunningJobKey,
-      period: 15000,
+      period: 20000,
       alwaysRunning: true,
       exact: true,
       allowWhileIdle: true,
@@ -59,7 +61,7 @@ class TagsScreen extends Component {
   }
 
   backgroundRunning = () => {
-    this.props.getBluetoothDevicesList();
+    this.props.getBluetoothDevicesList();    
   }
 
   
