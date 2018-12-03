@@ -7,14 +7,13 @@ import { Button } from 'react-native-elements'
 
 import * as tagsActions from '../store/actions';
 import TagList from '../components/TagList';
-import storage from '../functions/Storage';
-
 
 import Input from '../components/textInput'
 
+// O QUE RODA EM BACKGROUND DEVE SER INTANCIADO ANTES DO COMPONENTE
+import BackgroundJob from "react-native-background-job";
 
 
-//import { TagPosition } from '../functions/GPSTag'
 
 class TagsScreen extends Component {
   constructor(props) {
@@ -25,17 +24,24 @@ class TagsScreen extends Component {
   }
 
   componentDidMount () {
-    /* var self = this;
-    storage.getAllData() //tem que esperar a promise
-          .then(function (devices) {
-              self.setState({message: "Scaneamento finalizado.",
-              pairedDevices: devices}
-              );
 
-        })
-          .catch(()=> console.log("Promise rejected")) */
+    const everRunningJobKey = "everRunningJobKey";
+    BackgroundJob.register({
+      jobKey: everRunningJobKey,
+      job: () => {this.backgroundRunning()}
+    });
+    BackgroundJob.cancelAll();
+    BackgroundJob.schedule({
+      jobKey: everRunningJobKey,
+      period: 15000,
+      alwaysRunning: true,
+      exact: true,
+      allowWhileIdle: true,
+      allowExecutionInForeground: true,
+      notificationTitle: "SmartTags",
+      notificationMessage: "On Background"
+    })  
   }
-  
 
   addNewTag = () => {
     this.props.addTagFake(this.state.textInput)
@@ -52,6 +58,9 @@ class TagsScreen extends Component {
     this.addNewTag(this.state.textInput)
   }
 
+  backgroundRunning = () => {
+    this.props.getBluetoothDevicesList();
+  }
 
   
   render() {

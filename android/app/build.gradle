@@ -152,6 +152,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-background-job')
     compile project(':easy-bluetooth-classic')
     compile project(':react-native-toast')
     compile project(':react-native-geolocation-service')

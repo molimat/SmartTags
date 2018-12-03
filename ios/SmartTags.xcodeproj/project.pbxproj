@@ -58,6 +58,7 @@
 		2EE41FF3B0CC4061B050AC9C /* libRCTBluetoothSerial.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 729635CDBE4E4EE0AEDF5A75 /* libRCTBluetoothSerial.a */; };
 		3A819D81F37A40A0BF4A4525 /* libRCTToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4516B54C6749FE8479239D /* libRCTToast.a */; };
 		BBA880BB643E430980692A65 /* libRNLocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B167C2FAC2467087C9867D /* libRNLocation.a */; };
+		41F4F46BE3354D549F5E8773 /* libRNBackgroundJob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50156FC0E36646D383FB3AF6 /* libRNBackgroundJob.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -389,6 +390,8 @@
 		4B4516B54C6749FE8479239D /* libRCTToast.a */ = {isa = PBXFileReference; name = "libRCTToast.a"; path = "libRCTToast.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		7AE547A8670742D5AF979879 /* RNLocation.xcodeproj */ = {isa = PBXFileReference; name = "RNLocation.xcodeproj"; path = "../node_modules/react-native-location/ios/RNLocation.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		33B167C2FAC2467087C9867D /* libRNLocation.a */ = {isa = PBXFileReference; name = "libRNLocation.a"; path = "libRNLocation.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		74FD40EC7D1744EEBA7A7736 /* RNBackgroundJob.xcodeproj */ = {isa = PBXFileReference; name = "RNBackgroundJob.xcodeproj"; path = "../node_modules/react-native-background-job/ios/RNBackgroundJob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		50156FC0E36646D383FB3AF6 /* libRNBackgroundJob.a */ = {isa = PBXFileReference; name = "libRNBackgroundJob.a"; path = "libRNBackgroundJob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,6 +424,7 @@
 				2EE41FF3B0CC4061B050AC9C /* libRCTBluetoothSerial.a in Frameworks */,
 				3A819D81F37A40A0BF4A4525 /* libRCTToast.a in Frameworks */,
 				BBA880BB643E430980692A65 /* libRNLocation.a in Frameworks */,
+				41F4F46BE3354D549F5E8773 /* libRNBackgroundJob.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +617,7 @@
 				463531A82A454F06B6B51677 /* RCTBluetoothSerial.xcodeproj */,
 				EBE5D2D71F6349CB9C344F1B /* RCTToast.xcodeproj */,
 				7AE547A8670742D5AF979879 /* RNLocation.xcodeproj */,
+				74FD40EC7D1744EEBA7A7736 /* RNBackgroundJob.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1279,6 +1284,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartTags.app/SmartTags";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1287,6 +1293,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-bluetooth-serial\ios\RCTBluetoothSerial",
 					"$(SRCROOT)\..\node_modules\react-native-toast\ios\RCTToast",
 					"$(SRCROOT)\..\node_modules\react-native-location\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Debug;
@@ -1308,14 +1315,15 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartTags.app/SmartTags";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-ble-plx\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
-					
 					"$(SRCROOT)\..\node_modules\react-native-toast\ios\RCTToast",
 					"$(SRCROOT)\..\node_modules\react-native-location\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Release;
@@ -1343,6 +1351,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-bluetooth-serial\ios\RCTBluetoothSerial",
 					"$(SRCROOT)\..\node_modules\react-native-toast\ios\RCTToast",
 					"$(SRCROOT)\..\node_modules\react-native-location\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Debug;
@@ -1369,6 +1378,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-bluetooth-serial\ios\RCTBluetoothSerial",
 					"$(SRCROOT)\..\node_modules\react-native-toast\ios\RCTToast",
 					"$(SRCROOT)\..\node_modules\react-native-location\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Release;
@@ -1398,6 +1408,7 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1406,6 +1417,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-bluetooth-serial\ios\RCTBluetoothSerial",
 					"$(SRCROOT)\..\node_modules\react-native-toast\ios\RCTToast",
 					"$(SRCROOT)\..\node_modules\react-native-location\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Debug;
@@ -1435,6 +1447,7 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1443,6 +1456,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-bluetooth-serial\ios\RCTBluetoothSerial",
 					"$(SRCROOT)\..\node_modules\react-native-toast\ios\RCTToast",
 					"$(SRCROOT)\..\node_modules\react-native-location\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Release;
@@ -1471,6 +1485,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1479,6 +1494,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-bluetooth-serial\ios\RCTBluetoothSerial",
 					"$(SRCROOT)\..\node_modules\react-native-toast\ios\RCTToast",
 					"$(SRCROOT)\..\node_modules\react-native-location\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Debug;
@@ -1507,6 +1523,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1515,6 +1532,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-bluetooth-serial\ios\RCTBluetoothSerial",
 					"$(SRCROOT)\..\node_modules\react-native-toast\ios\RCTToast",
 					"$(SRCROOT)\..\node_modules\react-native-location\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Release;

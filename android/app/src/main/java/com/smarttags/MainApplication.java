@@ -3,6 +3,7 @@ package com.smarttags;
 import android.app.Application;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.facebook.react.ReactApplication;
+import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import io.github.douglasjunior.ReactNativeEasyBluetooth.classic.ClassicPackage;
 import com.remobile.toast.RCTToastPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BackgroundJobPackage(),
             new ClassicPackage(),
             new RCTToastPackage(),
             new VectorIconsPackage(),

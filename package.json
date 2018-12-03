@@ -11,6 +11,7 @@
     "easy-bluetooth-classic": "^1.0.4",
     "react": "16.6.1",
     "react-native": "0.57.5",
+    "react-native-background-job": "^2.2.0",
     "react-native-debugger": "^1.1.0",
     "react-native-elements": "^0.19.1",
     "react-native-geolocation-service": "^1.1.0",

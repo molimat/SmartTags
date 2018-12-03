@@ -10,7 +10,7 @@ import { withNavigation } from 'react-navigation';
 
 // NEW TAG ITEM
 // ESSA PAGINA É CHAMADA DE DENTRO DO NEW TAG
-
+// oi
 class NewTagItem extends Component {
     constructor(props) {
       super(props);
