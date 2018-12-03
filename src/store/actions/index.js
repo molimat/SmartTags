@@ -13,9 +13,13 @@ export const renameTag = (device, text) => ({
     payload: (device, text)
   });
 
-  export const setLocation = address => ({
-    type: "ASYNC_SET_LOCATION",
-    payload: address
-  });
+export const setLocation = address => ({
+  type: "ASYNC_SET_LOCATION",
+  payload: address
+});
 
+export const getBluetoothDevicesList = () => ({
+  type: "ASYNC_GET_LIST",
+  payload: null
+});
   

@@ -26,7 +26,10 @@ class HomeScreen extends Component {
 
   }
 
+
+  
 updateLocation() {
+    
     const list = this.props.setLocation(this.state.pickerValue)
     return list;
 }
@@ -37,7 +40,7 @@ onPress() {
 }
 
 ComponentDidUpdate() {
-  this.setState({status:""})
+
 }
 
 /* 

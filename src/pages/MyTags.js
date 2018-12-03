@@ -74,11 +74,11 @@ class TagsScreen extends Component {
             title='Update Status' /> 
           <Button style = {styles.button2}
             onPress={() => {
-                storage.removeTags()}}
+                this.props.getBluetoothDevicesList()}}
             raised
             backgroundColor = '#F24333'
             icon={{name: 'warning', type: 'font-awesome'}}
-            title='Remove Tags'  
+            title='Get Devices Lsit'  
           />
           <Button style = {styles.button2}
             onPress={() => {

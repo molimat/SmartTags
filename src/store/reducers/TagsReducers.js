@@ -17,7 +17,15 @@ export default function tags(state = initialState, action) {
         };
         return tag;
       });
-      
+
+    case 'GET_BLUETOOTH_LIST':
+      return state.map(tag => {
+        if (tag.address === action.payload.address) {
+          return {...tag, lastSeen: action.payload.updatedAt}
+          };
+          return tag; 
+        });  
+
     case 'RENAME_TAG':
       return 
     default:

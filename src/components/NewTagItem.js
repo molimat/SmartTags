@@ -31,7 +31,7 @@ class NewTagItem extends Component {
         const tag = {name: this.state.deviceName, 
                     address: this.state.deviceAddress,
                     latitude: null,
-                    longitude: null,
+                    longitude: null
                 }
         
         this.props.addTag(tag)

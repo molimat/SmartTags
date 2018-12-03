@@ -1,5 +1,5 @@
-import {takeEvery, put, call} from 'redux-saga/effects'
-import { getPersistor } from '../store';
+import {takeEvery, put, call, all} from 'redux-saga/effects';
+import EasyBluetooth from 'easy-bluetooth-classic';
 
 const getPosition = function () {
     return new Promise(function (resolve, reject) {
@@ -8,6 +8,29 @@ const getPosition = function () {
         );
       });
 }
+
+
+//FUNCAO QUE VAI RETORNAR PARA O ESTADO UMA LISTA DE DEVICES
+async function getBluetoothDevicesList () {
+    var config = {
+      "uuid": "00001101-0000-1000-8000-00805f9b34fb",
+      "deviceName": "Bluetooth Example Project",
+      "bufferSize": 1024,
+      "characterDelimiter": "\n" 
+    }   
+    try { 
+        await EasyBluetooth.init(config); }
+    catch (e){ 
+        console.log( "Erro na configuração do BT" + e );
+        return 1}
+    try { 
+        let scanned = await EasyBluetooth.startScan();
+            return scanned; }
+    catch (e){ console.log ("Erro ao escanear os dispositivos" + e); 
+        return 1}
+}
+
+
 
 function* asyncSetLocation(action){
 
@@ -21,9 +44,25 @@ function* asyncSetLocation(action){
             })      
 }
 
-export default function* root(){
-    yield [
-        takeEvery('ASYNC_SET_LOCATION', asyncSetLocation),
+function* asyncGetBluetoothList(){
+    
+    const devices = yield call (getBluetoothDevicesList);
+    const date = new Date();
+    if (!devices[0]) {
+        yield put({type:'default'})
+    } else {
+    for (var i =0; i < devices.length; i++ )  {
+        yield put({type:'GET_BLUETOOTH_LIST', 
+                payload:
+                    {address: devices[i]['address'],
+                    updatedAt: date}
+                }) }  
+    }
+}
 
-    ];
+export default function* root(){
+    yield all ( [
+        takeEvery('ASYNC_SET_LOCATION', asyncSetLocation),
+        takeEvery('ASYNC_GET_LIST', asyncGetBluetoothList)
+  ]);
 }
