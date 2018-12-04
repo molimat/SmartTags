@@ -3,14 +3,14 @@ export const addTag = (tag)=> ({
     payload: tag
   });
 
-export const removeTag = id => ({
+export const removeTag = address => ({
     type: "REMOVE_TAG",
-    payload: id
+    payload: address
 });
 
-export const renameTag = (device, text) => ({
+export const renameTag = (address, text) => ({
     type: "RENAME_TAG",
-    payload: (device, text)
+    payload: (address, text)
   });
 
 export const setLocation = (address) => ({

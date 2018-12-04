@@ -37,31 +37,39 @@ async function getBluetoothDevicesList () {
 function* asyncSetLocation(action){
     const response = yield call (getPosition);
     const {latitude, longitude} = response.coords; // vai pegar posição
+    if(response.latitude){
     yield put({type:'SET_LOCATION', 
             payload:
                 {address: action.payload,
                  latitude: latitude,
                  longitude: longitude}
             })
+    } else {
+        yield put({type:'default'})
+    }
 }
 
 function* asyncGetBluetoothList(){
     const response = yield call (getPosition);
-    const {latitude, longitude} = response.coords;
-    const devices = yield call (getBluetoothDevicesList);
-    const date = moment().format('llll')
-    if (!devices[0]) {
-        yield put({type:'default'})
+    if(response.latitude){
+        const {latitude, longitude} = response.coords;
+        const devices = yield call (getBluetoothDevicesList);
+        const date = moment().format('llll')
+        if (!devices[0]) {
+            yield put({type:'default'})
+        } else {
+        for (var i =0; i < devices.length; i++ )  {
+            yield put({type:'GET_BLUETOOTH_LIST', 
+                    payload:
+                        {address: devices[i]['address'],
+                        updatedAt: date,
+                        latitude: latitude,
+                        longitude: longitude
+                        }
+                    }) }  
+        }
     } else {
-    for (var i =0; i < devices.length; i++ )  {
-        yield put({type:'GET_BLUETOOTH_LIST', 
-                payload:
-                    {address: devices[i]['address'],
-                    updatedAt: date,
-                    latitude: latitude,
-                    longitude: longitude
-                    }
-                }) }  
+        yield put({type:'default'})
     }
 }
 
