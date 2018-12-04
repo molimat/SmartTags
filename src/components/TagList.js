@@ -7,20 +7,18 @@ import TagItem from '../components/TagItem'
 const TagList = props => {
 
     const devicesList = props.devices;
-    const origem = props.origem;
 
     //aqui a gente vai passar device a device para a page TagItem
     const items = devicesList.map((device) => 
         <TagItem 
-            key = {device.id}       
-            address = {device.id} 
-            name = {device.name}
-            origem = {origem}/>
+            key = {device.address}       
+            address = {device.address} 
+            name = {device.name}/>
      );
 
 
      return (
-        <View key = {items.id} styles = {styles.container}>
+        <View key = {items.address} styles = {styles.container}>
           {items}
         </View>
       );
