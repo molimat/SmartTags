@@ -33,7 +33,7 @@ class TagsScreen extends Component {
     });
     BackgroundJob.schedule({
       jobKey: everRunningJobKey,
-      period: 10000,
+      period: 30000,
       alwaysRunning: true,
       exact: true,
       allowWhileIdle: true,
