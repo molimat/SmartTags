@@ -15,9 +15,7 @@ export const removeTag = address => ({
 
 export const setLocation = (address) => ({
   type: "ASYNC_SET_LOCATION",
-  payload: {
-    addres: address
-  }
+  payload: address
 });
 
 export const getBluetoothDevicesList = () => ({

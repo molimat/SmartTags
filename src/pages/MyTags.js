@@ -33,11 +33,11 @@ class TagsScreen extends Component {
     });
     BackgroundJob.schedule({
       jobKey: everRunningJobKey,
-      period: 30000,
+      period: 10000,
       alwaysRunning: true,
       exact: true,
       allowWhileIdle: true,
-      allowExecutionInForeground: true,
+      allowExecutionInForeground: false,
       notificationTitle: "SmartTags",
       notificationMessage: "On Background"
     })  

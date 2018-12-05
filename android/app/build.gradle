@@ -160,7 +160,6 @@ android {
 dependencies {
 
     compile project(':react-native-geolocation-service')
-    compile project(':bugsnag-react-native')
     compile project(':react-native-background-job')
     compile project(':easy-bluetooth-classic')
     compile ('com.android.support:recyclerview-v7:26+')

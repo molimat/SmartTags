@@ -37,18 +37,6 @@ class NewTagScreen extends Component {
       
     }
 
-  /*   navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({devices: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        }});
-      },
-      (error) => {console.log(error)},
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    ); */
-
-
 
     EasyBluetooth.init(config)
       .then(function (config) {
@@ -58,14 +46,15 @@ class NewTagScreen extends Component {
         console.warn(ex);
       });
   
-  
+    this.setState({message: "Scanning devices..."})
     EasyBluetooth.startScan()
       .then(function (devices) {
+        self.setState({message: "Scan finalizado."})
           if (!devices[0]) {
-              self.setState({found: false})
-              self.setState({loading: false})
               self.setState({message: "Nenhuma SmartTAG encontrada :("})
+              self.setState({loading: false})   
           } else  {   
+                self.setState({message: "Tags disponiveis abaixo:"})
                 self.setState({devices: devices})
                 self.setState({loading: false})
                 self.setState({found: true})
@@ -79,7 +68,7 @@ class NewTagScreen extends Component {
   }
 
 
-  render() { //corrigir o loading pra ficar maneiro
+  render() { 
     return (
         <View style={styles.container}>
           {this.state.loading && (
@@ -90,8 +79,8 @@ class NewTagScreen extends Component {
             />
           )}
           <View style={styles.listContainer}>
-            { !(this.state.loading) && (this.state.found) && <Text style = {styles.tittle}>Escolha qual TAG quer adicionar:</Text> }
-            { !(this.state.loading) && <NewTagList devices = {this.state.devices}/> }
+            { this.state.found && <Text style = {styles.tittle}>{this.state.message}</Text> }
+            { this.state.found && <NewTagList devices = {this.state.devices}/> }
           </View>
           <View style={styles.imageContainer}>
            

@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as tagsActions from '../store/actions'
 import { withNavigation } from 'react-navigation';
 
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 // NEW TAG ITEM
 // ESSA PAGINA É CHAMADA DE DENTRO DO NEW TAG
@@ -36,8 +37,10 @@ class NewTagItem extends Component {
         this.props.addTag(tag)
         this.props.setLocation(tag.address)
         this.setState({deviceName: ''})
-        this.props.navigation.navigate('TagStack')
-        
+        this.refs.toast.show('Pairing your TAG...', 3500, () => {
+            this.props.navigation.navigate('TagStack')
+        });
+          
     }
 
     onPress = () => { this.addNewTag(this.state.deviceName)}
@@ -63,6 +66,9 @@ class NewTagItem extends Component {
                         />
                     </TouchableHighlight>    
                 </View> 
+                <Toast ref='toast'
+                    position={'center'}
+                />
             </View>
         )
 

@@ -6,7 +6,7 @@ import com.facebook.react.ReactApplication;
 
 import com.mapbox.rctmgl.RCTMGLPackage;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
-import com.bugsnag.BugsnagReactNative;
+
 import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import io.github.douglasjunior.ReactNativeEasyBluetooth.classic.ClassicPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -32,7 +32,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNFusedLocationPackage(),
-            BugsnagReactNative.getPackage(),
             new BackgroundJobPackage(),
             new ClassicPackage(),
             new VectorIconsPackage(),
