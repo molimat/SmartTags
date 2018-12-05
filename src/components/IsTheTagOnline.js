@@ -1,55 +1,27 @@
 import React, { Component } from 'react';
 import { View,StyleSheet } from 'react-native';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as tagsActions from '../store/actions';
-import moment from 'moment';
-
 class IsOnline extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        color: "#666"
     };
   }
 
-  componentDidMount () {
-      this.isOnline();
+  componentDidMount() {
+
   }
-
-  isOnline () {
-
-    let now =  moment();
-    let then = moment(this.props.lastSeen);
-    let result = now.diff(then, 'minutes')
-
-    if (result > 60) {
-        this.setState({color: "#AD2021"})
-    } else if (result > 5 ) {
-    this.setState({color: "#F06E1B"})
-    } else {
-    this.setState({color: "#0CA98E"})
-    }
- }
 
   render() {
     return (
         <View style={styles.annotationContainer}>
-            <View style={styles.annotationFill} backgroundColor = {this.state.color} />
+            <View style={styles.annotationFill} backgroundColor = {this.props.color} />
         </View>
     );
   }
 }
 
-const mapStateToPros = state => ({
-  tags: state.tags
-});
-
-const mapDispatchToProps = dispatch => 
-  (bindActionCreators(tagsActions, dispatch))
-
-export default connect(mapStateToPros, mapDispatchToProps) (IsOnline);
+export default IsOnline;
 
 
 const styles = StyleSheet.create({

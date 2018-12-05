@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Picker } from 'react-native';
+import { View, Text, StyleSheet, Picker, ActivityIndicator } from 'react-native';
 import LocationMap from '../components/LocationMap';
 import MapboxGL from '@mapbox/react-native-mapbox-gl';
 import { Button } from 'react-native-elements'
@@ -22,7 +22,7 @@ class HomeScreen extends Component {
       auxLatitude: this.props.tags[0]['latitude'],
       auxLongitude: this.props.tags[0]['longitude'],
       auxLastSeen: this.props.tags[0]['lastSeen'],
-      status: ''
+      loading: false
     }
 
   }
@@ -34,13 +34,20 @@ updateLocation() {
     const list = this.props.getBluetoothDevicesList();
     return list;
 }
+
+
   
 onPress() {
+  this.setState({loading: true})
   this.updateLocation();
+  setTimeout(() => {
+    this.setState({loading: false});
+  }, 10000)
+  
 }
 
-ComponentDidUpdate() {
-
+componentDidMount() {
+  this.setState({loading: false})
 }
 
 /* 
@@ -111,6 +118,13 @@ ComponentDidUpdate() {
             <Text>Ultima vez visto em {this.props.tags[this.state.pickerId]['lastSeen']}</Text>
           </View>
           <View>
+            {this.state.loading && (
+              <ActivityIndicator
+                style={{ height: 80 }}
+                color="#F06E1B"
+                size="large"
+              />
+            )}
             <Button style = {styles.button}
                 onPress={() => {
                   this.onPress(); 
@@ -134,11 +148,11 @@ const styles = StyleSheet.create({
   },
 
   pickerContainer: {
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    backgroundColor: '#fff', 
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F06E1B', 
     flex: 1,
-    marginRight: 80
+
   },
 
   containerInfo: {
@@ -152,9 +166,12 @@ const styles = StyleSheet.create({
     height: 50,
     width: 200,
     backgroundColor: '#FFF',
-    alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center',
-   
+    backgroundColor: '#F06E1B', 
+    color: "#FFF",
+    borderWidth: 2,
+    borderColor: '#FFF'
   },
 
   container: {

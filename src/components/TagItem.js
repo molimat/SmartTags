@@ -21,12 +21,33 @@ class TagItem extends Component {
         }
       }
     
+
+    isOnline (address) {
+    const color = this.props.tags.map(tag => {
+            if (tag.address === address) {
+                let now =  moment();
+                let then = moment(this.props.lastSeen);
+                let result = now.diff(then, 'minutes')
+               
+                if (result > 60) {
+                    return "#AD2021"
+                } else if (result > 5 ) {
+                    return "#F06E1B"
+                } else {
+                    return "#0CA98E"
+                }
+            }
+        })
+        return(color)
+    }
+
    render () {
         const {address, name} = this.props;
+        
         const device = {address: this.address, name:this.name}
         return (
             <View style = {styles.container}>
-                <IsOnline lastSeen = {this.props.tags.lastSeen}/>
+                <IsOnline color = {this.isOnline(address)}/>
                 <View style = {styles.textContainer}>
                     <TouchableHighlight onLongPress = {()=>{return 1}}>
                         <Text style = {styles.name}>{name}</Text>
