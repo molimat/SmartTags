@@ -1,97 +1,121 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {View, Text, StyleSheet, Image, TouchableHighlight} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons' 
+import Icon from 'react-native-vector-icons/FontAwesome' 
 import {connectToDevice, sendChar} from '../functions/Bluetooth'
 
+import IsOnline from '../components/IsTheTagOnline'
 
 
-const TagItem = (props) => {
-    const {address, name } = props;
-    const device = {address: this.address, name:this.name}
-   
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as tagsActions from '../store/actions';
+
+import moment from 'moment';
+
+class TagItem extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          textInput: "",
+        }
+      }
+    
+   render () {
+        const {address, name} = this.props;
+        const device = {address: this.address, name:this.name}
         return (
             <View style = {styles.container}>
-                    <Text style = {styles.address}>{address}</Text>
-                    <Text style = {styles.name}>{name}</Text> 
-                    <View>
-                        <TouchableHighlight>
-                            <View>
-                                <Icon   name = "ios-cellular" 
-                                    size= {30} 
-                                    onPress={() => connectToDevice(device)}/>
-                            </View>
-                        </TouchableHighlight>    
-                    </View>
-                    <View>
-                        <TouchableHighlight>
-                            <View>
-                                <Icon   name = "ios-alert" 
-                                    size= {30} 
-                                    onPress={() => sendChar()}/>
-                            </View>
-                        </TouchableHighlight>    
-                    </View>
+                <IsOnline lastSeen = {this.props.tags.lastSeen}/>
+                <View style = {styles.textContainer}>
+                    <TouchableHighlight onLongPress = {()=>{return 1}}>
+                        <Text style = {styles.name}>{name}</Text>
+                    </TouchableHighlight>
+                        <Text style = {styles.address}>{address}</Text>   
+                </View>
+                <View style = {styles.menuContainer}>
+                    <TouchableHighlight style = {styles.buttonItemCont}>
+                            <Icon   name = "pencil" style = {styles.buttons}
+                                size= {20} 
+                                onPress={() => connectToDevice(device)}/>
+                    </TouchableHighlight>    
+                    <TouchableHighlight style = {styles.buttonItemCont}>
+                            <Icon   name = "trash-o" style = {styles.buttons}
+                                size= {20} 
+                                onPress={() => this.props.removeTag(address)}/>
+                    </TouchableHighlight>    
+                </View>
             </View>
         
         )
     
-    
+    } 
 }
 
+const mapStateToPros = state => ({
+    tags: state.tags
+  });
+  
+const mapDispatchToProps = dispatch => 
+  (bindActionCreators(tagsActions, dispatch))
+
+export default connect(mapStateToPros, mapDispatchToProps) (TagItem);
+
 const styles = StyleSheet.create({
-    address: {
-        fontSize : 20,
-        color: '#333',
-        alignSelf: 'auto',
-    },
-
+    
     container: {
-        borderWidth: 1,
-        borderColor: '#333',
-        borderRadius: 10,
+        flexDirection: 'row',
         justifyContent: 'space-evenly',
-        flexDirection: 'row'
+        borderRadius: 10,
+        backgroundColor: "#0E4252",
+        flex: 0.3,
+        shadowColor: '#000',
+        shadowOffset: { width: 2, height: 4 },
+        shadowOpacity: 0.6,
+        shadowRadius: 2,
+        elevation: 5
+    },
+   
+   
+    address: {
+        color: "#FCF9F9",
+        fontSize : 8,
+        alignSelf: 'auto',
+        marginLeft: 5
     },
 
-   
-    id: {
-        fontSize : 20,
-        color: '#333',
-        alignSelf: 'auto',
+    textContainer: {
+        alignContent: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        flex: 5,
+        marginLeft: 15,
     },
+
+    menuContainer: {
+        alignSelf: 'center',
+        flexDirection: 'row',
+        flex: 3,
+        justifyContent: 'space-evenly',
+    },
+
+
 
     name: {
-        fontSize : 10,
-        color: '#333',
+        color: "#FCF9F9",
+        fontSize : 20,
         alignSelf: 'auto',
     },
 
-    containerNew: {
-        borderWidth: 1,
-        borderColor: '#333',
-        borderRadius: 10,
-        justifyContent: 'space-evenly',
-        flexDirection: 'row'
+    buttons: {
+        color: "#FCF9F9",
+
     },
-    nameNew: {
-        fontSize : 20,
-        color: '#333',
-        alignSelf: 'auto',
-    },
-    idNew: {
-        fontSize : 10,
-        color: '#333',
-        alignSelf: 'auto',
-    },
-    addressNew: {
-        fontSize : 20,
-        color: '#333',
-        alignSelf: 'auto',
-    },
+
+ 
+
 
 
 });
-
-export default TagItem;
 
 

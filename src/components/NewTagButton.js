@@ -3,6 +3,8 @@ import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Font from '../assets/fonts/fonts'
+import { Button } from 'react-native-elements';
+
 
 class NewTagButton extends Component {
   constructor(props) {
@@ -18,41 +20,19 @@ class NewTagButton extends Component {
 
   render() {
     return (
-      <View>
-          <TouchableOpacity style = {styles.buttonContainer} onPress={() => this.goToNewTagScreen()}>
-            <Icon 
-              name = "ios-add"   
-              color = 'green'
-              size = {15}
-            />
-            <Text style = {styles.buttonText}> Add Tag</Text>
-          </TouchableOpacity>
+      <View> 
+          <Button
+              onPress={() => this.goToNewTagScreen()}
+              raised
+              borderRadius = {5}
+              backgroundColor = '#0CA98E'
+              icon={{name: 'feed', type: 'font-awesome'}}
+              title='PAIR NEW TAG'  
+            /> 
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 10
-  },
-  buttonText: {
-    color: 'green',
-    fontSize: 12,
-    fontFamily: Font.buttonFont
-  },
-  buttonContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    borderWidth: 1.5,
-    borderColor: 'green',
-    borderRadius: 10,
-    height: 30,
-    width: 70
-  }
-})
 
 export default withNavigation(NewTagButton);

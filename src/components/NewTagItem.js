@@ -38,6 +38,7 @@ class NewTagItem extends Component {
         this.props.setLocation(tag.address)
         this.setState({deviceName: ''})
         this.props.navigation.navigate('TagStack')
+        
     }
 
     onPress = () => { this.addNewTag(this.state.deviceName)}

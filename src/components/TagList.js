@@ -13,12 +13,13 @@ const TagList = props => {
         <TagItem 
             key = {device.address}       
             address = {device.address} 
-            name = {device.name}/>
+            name = {device.name}
+            lastSeen = {device.lastSeen} />
      );
 
 
      return (
-        <View key = {items.address} styles = {styles.container}>
+        <View key = {items.address} style = {styles.container}>
           {items}
         </View>
       );
@@ -29,7 +30,13 @@ const TagList = props => {
 const styles = StyleSheet.create({
     container : {
         alignItems:'center',
-        
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
+        height: 200,
+        alignItems: 'stretch',
+        marginLeft: 10,
+        marginRight: 10,
+       
   
     }
   })

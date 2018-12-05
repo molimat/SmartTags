@@ -1,17 +1,20 @@
 package com.smarttags;
 
 import android.app.Application;
-import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
+
 import com.facebook.react.ReactApplication;
+
+import com.mapbox.rctmgl.RCTMGLPackage;
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
+import com.bugsnag.BugsnagReactNative;
 import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import io.github.douglasjunior.ReactNativeEasyBluetooth.classic.ClassicPackage;
-import com.remobile.toast.RCTToastPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.mapbox.rctmgl.RCTMGLPackage;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,16 +27,16 @@ public class MainApplication extends Application implements ReactApplication {
       return BuildConfig.DEBUG;
     }
 
-
+    @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFusedLocationPackage(),
+            BugsnagReactNative.getPackage(),
             new BackgroundJobPackage(),
             new ClassicPackage(),
-            new RCTToastPackage(),
             new VectorIconsPackage(),
-            new RCTMGLPackage(),
-            new RNFusedLocationPackage()
+            new RCTMGLPackage()
       );
     }
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { View} from 'react-native';
 import { withNavigation } from 'react-navigation';
-import Icon from 'react-native-vector-icons/Ionicons'
-import Font from '../assets/fonts/fonts'
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class CancelNewTagButton extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class CancelNewTagButton extends Component {
     this.state = {
     };
   }
-
+ 
 
   goToHomeScreen() {
     this.props.navigation.navigate('TagStack');;
@@ -19,39 +19,18 @@ class CancelNewTagButton extends Component {
   render() {
     return (
       <View>
-          <TouchableOpacity onPress={() => this.goToHomeScreen()} style = {styles.buttonContainer}>
-            <Icon 
-              name = "md-close"   
-              color = 'red'
-            />
-            <Text style = { styles.buttonText }> Cancel </Text>
-          </TouchableOpacity>
+          <Button
+            onPress={() => this.goToHomeScreen()}
+            raised
+            backgroundColor = '#AD2021'
+            icon={{name: 'close', type: 'font-awesome'}}
+            title='Cancel'  
+            borderRadius = {5}
+          />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      paddingHorizontal: 10
-    },
-    buttonText: {
-      color: 'red',
-      fontSize: 12,
-      fontFamily: Font.buttonFont
-    },
-    buttonContainer: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row',
-      borderWidth: 1,
-      borderColor: 'red',
-      borderRadius: 10,
-      height: 30,
-      width: 60
-    }
-  })
 
 export default withNavigation(CancelNewTagButton);

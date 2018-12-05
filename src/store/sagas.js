@@ -37,22 +37,21 @@ async function getBluetoothDevicesList () {
 function* asyncSetLocation(action){
     const response = yield call (getPosition);
     const {latitude, longitude} = response.coords; // vai pegar posição
-    if(response.latitude){
-    yield put({type:'SET_LOCATION', 
+    if (typeof latitude != 'undefined') {
+        yield put({type:'SET_LOCATION', 
             payload:
                 {address: action.payload,
-                 latitude: latitude,
-                 longitude: longitude}
+                    latitude: latitude,
+                    longitude: longitude}
             })
-    } else {
-        yield put({type:'default'})
-    }
+    }   
 }
+
 
 function* asyncGetBluetoothList(){
     const response = yield call (getPosition);
-    if(response.latitude){
-        const {latitude, longitude} = response.coords;
+    const {latitude, longitude} = response.coords;
+    if (typeof latitude != 'undefined') {
         const devices = yield call (getBluetoothDevicesList);
         const date = moment().format('llll')
         if (!devices[0]) {
@@ -67,9 +66,7 @@ function* asyncGetBluetoothList(){
                         longitude: longitude
                         }
                     }) }  
-        }
-    } else {
-        yield put({type:'default'})
+        }    
     }
 }
 

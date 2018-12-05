@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import React, { Component,  } from 'react';
+import { View, Text, StyleSheet, ActivityIndicator, Image } from 'react-native';
 import MainTabNavigator from '../navigation/MainTabNavigator';
 import CancelNewTagButton from '../components/CancelNewTagButton';
 
@@ -13,9 +13,9 @@ class NewTagScreen extends Component {
     super(props);
     this.state = {
       devices: [],
-      ready: false,
       loading: true,
-      message: "",
+      found: false,
+      message: "AHHH"
     };
     
   }
@@ -57,18 +57,17 @@ class NewTagScreen extends Component {
         console.warn(ex);
       });
   
-    this.setState({message: "Scanning devices.."})
+  
     EasyBluetooth.startScan()
       .then(function (devices) {
-        self.setState({message: "Scaneamento finalizado."})
           if (!devices[0]) {
-              self.setState({message: "Nenhuma tag encontrada."})
+              self.setState({found: false})
               self.setState({loading: false})
+              self.setState({message: "Nenhuma SmartTag encontrada ;["})
           } else  {   
-                self.setState({message: "Tags disponiveis abaixo."})
                 self.setState({devices: devices})
-                self.setState({ready: true})
                 self.setState({loading: false})
+                self.setState({found: true})
           }
 
         })
@@ -81,23 +80,56 @@ class NewTagScreen extends Component {
 
   render() { //corrigir o loading pra ficar maneiro
     return (
-      <View>
-        <Text style = {styles.info}>{this.state.message}</Text>
-        { this.state.ready && <NewTagList devices = {this.state.devices}/> } 
-        <CancelNewTagButton />
+        <View style={styles.container}>
+          {this.state.loading && (
+            <ActivityIndicator
+              style={{ height: 80 }}
+              color="#C00"
+              size="large"
+            />
+          )}
+          <View style={styles.imageContainer}>
+            { !(this.state.loading) && <NewTagList devices = {this.state.devices}/> }
 
-      </View>
+            { !(this.state.loading) && !(this.state.found) &&
+
+            <Image
+            style={styles.image}
+            source={require('../assets/images/robot-prod.png')}/> } 
+
+            { !(this.state.loading) && !(this.state.loading) &&
+              <Text style = {styles.info}>{this.state.message}</Text> } 
+           
+                    
+          </View>
+          <View>
+            <CancelNewTagButton />
+          </View>
+        </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  cancelButton : {
-
+  container : {
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    flex: 1,
+  },
+  imageContainer: {
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  image: {
+    height: 150,
+    width: 150,
+    margin: 20
   },
 
   info: {
-    fontSize: 20
+    fontSize: 15,
+    color: "#999",
+    alignItems: 'center',
   }
 })
 
