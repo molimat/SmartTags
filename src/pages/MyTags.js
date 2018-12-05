@@ -24,18 +24,18 @@ class TagsScreen extends Component {
       textInput: "",
     }
   }
-
+  
   componentDidMount () {
     BackgroundJob.cancelAll();
+    
     const everRunningJobKey = "everRunningJobKey";
     BackgroundJob.register({
       jobKey: everRunningJobKey,
       job: () => {this.backgroundRunning()}
     });
-    
     BackgroundJob.schedule({
       jobKey: everRunningJobKey,
-      period: 60000,
+      period: 30000,
       alwaysRunning: true,
       exact: true,
       allowWhileIdle: true,

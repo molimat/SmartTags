@@ -15,7 +15,8 @@ class NewTagScreen extends Component {
       devices: [],
       loading: true,
       found: false,
-      message: "AHHH"
+      message:""
+
     };
     
   }
@@ -63,7 +64,7 @@ class NewTagScreen extends Component {
           if (!devices[0]) {
               self.setState({found: false})
               self.setState({loading: false})
-              self.setState({message: "Nenhuma SmartTag encontrada ;["})
+              self.setState({message: "Nenhuma SmartTAG encontrada :("})
           } else  {   
                 self.setState({devices: devices})
                 self.setState({loading: false})
@@ -88,8 +89,12 @@ class NewTagScreen extends Component {
               size="large"
             />
           )}
-          <View style={styles.imageContainer}>
+          <View style={styles.listContainer}>
+            { !(this.state.loading) && (this.state.found) && <Text style = {styles.tittle}>Escolha qual TAG quer adicionar:</Text> }
             { !(this.state.loading) && <NewTagList devices = {this.state.devices}/> }
+          </View>
+          <View style={styles.imageContainer}>
+           
 
             { !(this.state.loading) && !(this.state.found) &&
 
@@ -97,7 +102,7 @@ class NewTagScreen extends Component {
             style={styles.image}
             source={require('../assets/images/robot-prod.png')}/> } 
 
-            { !(this.state.loading) && !(this.state.loading) &&
+            { !(this.state.loading) && !(this.state.found) &&
               <Text style = {styles.info}>{this.state.message}</Text> } 
            
                     
@@ -120,10 +125,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between'
   },
+
+  listContainer: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
   image: {
     height: 150,
     width: 150,
     margin: 20
+  },
+
+  tittle: {
+    fontSize: 25,
+    alignSelf: 'center',
+    paddingTop: 40,
+    color: "#999"
   },
 
   info: {

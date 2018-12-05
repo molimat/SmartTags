@@ -8,10 +8,10 @@ export const removeTag = address => ({
     payload: address
 });
 
-export const renameTag = (address, text) => ({
+/* export const renameTag = (address, text) => ({
     type: "RENAME_TAG",
     payload: (address, text)
-  });
+  }); */
 
 export const setLocation = (address) => ({
   type: "ASYNC_SET_LOCATION",

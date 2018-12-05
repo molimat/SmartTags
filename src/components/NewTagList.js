@@ -18,7 +18,7 @@ const NewTagList = props => {
 
 
      return (
-        <View key = {items.address} styles = {styles.container}>
+        <View key = {items.address} style = {styles.container}>
           {items}
         </View>
       );
@@ -29,7 +29,13 @@ const NewTagList = props => {
 const styles = StyleSheet.create({
     container : {
         alignItems:'center',
-        
+        justifyContent: 'space-evenly',
+        height: 250,
+        width: 400,
+        alignItems: 'stretch',
+        marginLeft: 10,
+        marginRight: 10,
+       
   
     }
   })

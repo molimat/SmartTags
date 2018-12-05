@@ -1,7 +1,6 @@
 import React,  { Component } from 'react';
 import {View, Text, StyleSheet, Image, TouchableHighlight} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons' 
-import {connectToDevice, sendChar} from '../functions/Bluetooth'
+import Icon from 'react-native-vector-icons/FontAwesome' 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as tagsActions from '../store/actions'
@@ -49,75 +48,67 @@ class NewTagItem extends Component {
         return (
 
             <View style = {styles.containerNew}>
-                    <Text style = {styles.addressNew}>{this.state.deviceAddress}</Text> 
+                <View  style = {styles.textContainer}>
                     <Text style = {styles.nameNew}>{this.state.deviceName}</Text>
-                    <View>
-                        <TouchableHighlight>
-                            <View>
-                                <Icon   name = "ios-add-circle-outline" 
-                                    size= {30} 
-                                    onPress={() => {
-                                        this.onPress();
-                                    }}
-
-                                    />
-                            </View>
-                        </TouchableHighlight>    
-                    </View> 
+                    <Text style = {styles.addressNew}>{this.state.deviceAddress}</Text> 
+                </View>
+                <View>
+                    <TouchableHighlight style = {styles.button}>
+                        <Icon   name = "check" 
+                            size= {40} 
+                            color= "#FFFF"
+                            onPress={() => {
+                                this.onPress();
+                            }}
+                        />
+                    </TouchableHighlight>    
+                </View> 
             </View>
         )
 
     }
 }
 const styles = StyleSheet.create({
-    address: {
-        fontSize : 20,
-        color: '#333',
-        alignSelf: 'auto',
-    },
 
-    container: {
-        borderWidth: 1,
-        borderColor: '#333',
-        borderRadius: 10,
-        justifyContent: 'space-evenly',
-        flexDirection: 'row'
-    },
-
-   
-    id: {
-        fontSize : 20,
-        color: '#333',
-        alignSelf: 'auto',
-    },
-
-    name: {
-        fontSize : 10,
-        color: '#333',
-        alignSelf: 'auto',
-    },
 
     containerNew: {
-        borderWidth: 1,
-        borderColor: '#333',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         borderRadius: 10,
-        justifyContent: 'space-evenly',
-        flexDirection: 'row'
+        backgroundColor: "#0CA98E",
+        flex: 0.3,
+        shadowColor: '#000',
+        shadowOffset: { width: 2, height: 4 },
+        shadowOpacity: 0.6,
+        shadowRadius: 2,
+        elevation: 5
     },
+
     nameNew: {
+        color: "#FCF9F9",
         fontSize : 20,
-        color: '#333',
+        alignSelf: 'flex-end',
+    },
+
+    textContainer: {
+        alignContent: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+
+        marginLeft: 15,
+    },
+
+    nameNew: {
+        color: "#FCF9F9",
+        fontSize : 20,
         alignSelf: 'auto',
     },
-    idNew: {
-        fontSize : 10,
-        color: '#333',
-        alignSelf: 'auto',
-    },
+
     addressNew: {
-        fontSize : 20,
-        color: '#333',
+        color: "#FCF9F9",
+        fontSize : 8,
         alignSelf: 'auto',
+        marginLeft: 5
     },
 
 

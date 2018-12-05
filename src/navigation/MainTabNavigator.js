@@ -16,11 +16,11 @@ const HomeStack = HomeScreen;
 const myHomeIcon = ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={'md-home'}
+      name={'ios-compass'}
     />)
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Find',
   tabBarIcon: myHomeIcon
 };
 
@@ -29,7 +29,7 @@ const TagStack = TagsScreen;
 const myTagIcon = ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={'md-link'}
+      name={'md-home'}
     />)
 
 TagStack.navigationOptions = {
@@ -59,6 +59,5 @@ NewTagStack.navigationOptions = {
 
 export default createBottomTabNavigator({
     TagStack,
-    HomeStack,
-    SettingsStack
+    HomeStack
 });
