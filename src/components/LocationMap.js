@@ -13,8 +13,9 @@ export default class LocationMap extends Component {
     const latitude = this.props.latitude;
     const address = this.props.address;
     const name = this.props.name
+    const lastSeen= this.props.lastSeen
     
-    const message = (name + '\n' + address + '\n' + latitude + longitude)
+    const message = (name + '\n' + address + '\n' + lastSeen)
     return (
       <MapboxGL.PointAnnotation
         id={address}
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: '#7159C1',
+    backgroundColor: '#0CA98E',
     transform: [{ scale: 0.8 }],
   }
 });

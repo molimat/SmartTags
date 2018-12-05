@@ -34,11 +34,11 @@ class TagItem extends Component {
                         <Text style = {styles.address}>{address}</Text>   
                 </View>
                 <View style = {styles.menuContainer}>
-                    <TouchableHighlight style = {styles.buttonItemCont}>
+                   {/*  <TouchableHighlight style = {styles.buttonItemCont}>
                             <Icon   name = "pencil" style = {styles.buttons}
                                 size= {20} 
                                 onPress={() => connectToDevice(device)}/>
-                    </TouchableHighlight>    
+                    </TouchableHighlight> */}    
                     <TouchableHighlight style = {styles.buttonItemCont}>
                             <Icon   name = "trash-o" style = {styles.buttons}
                                 size= {20} 
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         flexDirection: 'row',
         flex: 3,
-        justifyContent: 'space-evenly',
+        justifyContent: 'flex-end',
+        marginRight: 20
     },
 
 
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
 
     buttons: {
         color: "#FCF9F9",
+        paddingLeft: 20
 
     },
 

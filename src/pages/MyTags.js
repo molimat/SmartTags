@@ -3,14 +3,12 @@ import { View, Text, TextInput, Image, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import NewTagButton from '../components/NewTagButton';
-import { Button } from 'react-native-elements'
-import moment from 'moment';
+
 import 'moment/min/moment-with-locales';
 
 import * as tagsActions from '../store/actions';
 import TagList from '../components/TagList';
 
-import Input from '../components/textInput'
 
 // O QUE RODA EM BACKGROUND DEVE SER INTANCIADO ANTES DO COMPONENTE
 import BackgroundJob from "react-native-background-job";

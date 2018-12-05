@@ -21,6 +21,7 @@ class HomeScreen extends Component {
       auxName: this.props.tags[0]['name'],
       auxLatitude: this.props.tags[0]['latitude'],
       auxLongitude: this.props.tags[0]['longitude'],
+      auxLastSeen: this.props.tags[0]['lastSeen'],
       status: ''
     }
 
@@ -94,27 +95,33 @@ ComponentDidUpdate() {
               })} 
           </Picker>
         </View>
-        <Text>Mapa abaixo</Text>
         <View style = {styles.containerMap}>
           <LocationMap
             address = {this.state.pickerValue}
             latitude = {this.props.tags[this.state.pickerId]['latitude']}
             longitude = {this.props.tags[this.state.pickerId]['longitude']}
             name = {this.props.tags[this.state.pickerId]['name']}
+            lastSeen = {this.props.tags[this.state.pickerId]['lastSeen']}
           />
         </View>
-        <View>
-          <Button style = {styles.button1}
-              onPress={() => {
-                this.onPress(); 
-              }}
-              raised
-              icon={{name: 'cached'}}
-              title='Update Status' /> 
+        <View style = {styles.containerInfo}>
+          <View>
+            <Text>Latitude: {this.props.tags[this.state.pickerId]['latitude']}</Text>
+            <Text>Longitude: {this.props.tags[this.state.pickerId]['longitude']}</Text>
+            <Text>Ultima vez visto em {this.props.tags[this.state.pickerId]['lastSeen']}</Text>
+          </View>
+          <View>
+            <Button style = {styles.button}
+                onPress={() => {
+                  this.onPress(); 
+                }}
+                raised
+                backgroundColor= "#0E4252"
+                borderRadius= {5}
+                icon={{name: 'cached'}}
+                title='Update Status' /> 
+          </View>
         </View>
-        <Text>
-          {this.state.status}
-        </Text>
       </View>
       
     );
@@ -123,14 +130,22 @@ ComponentDidUpdate() {
 
 const styles = StyleSheet.create({
   containerMap: {
-    flex: 0.5,
+    flex: 4,
   },
 
   pickerContainer: {
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'flex-end',
-    backgroundColor: '#333', 
-    flex: 0.1
+    backgroundColor: '#fff', 
+    flex: 1,
+    marginRight: 80
+  },
+
+  containerInfo: {
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    backgroundColor: '#fff', 
+    flex: 4
   },
 
   pickerStyle: {
@@ -139,11 +154,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
+   
   },
 
   container: {
     flex: 1,
+    
   }
 })
 
